@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+  1441525
+{% endblock head_title %}
+
+{% block jumbotron %}
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="jumbotron">
+        <h1>1442515</h1>
+        <p>La mejor ficha del CDITI</p>
+        <p>ADSI</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-6" style="background-color: black; height: 24.7em">
+   </div>
+  </div>
+{% endblock jumbotron %}
+{%  block content %}
+  <div class="row">
+  <div class="col-sm-3 col-xs-12 pull-right">
+    <p class="lead text-align-center">{{titulo}}</p>
+    {% if form %}
+        <form method="POST" action="">{% csrf_token%}
+           {{form | crispy}}
+           <input type="submit" value="Registrarme">
+       </form>
+    {% endif %}
+  </div>
+  <div class="col-sm-3 col-xs-12">
+        <p class="lead text-align-center">Hola 1</p>
+  </div>
+  <div class="col-sm-3 col-xs-12">
+        <p class="lead text-align-center">Hola 2</p>
+  </div>
+  <div class="col-sm-3 col-xs-12">
+        <p class="lead text-align-center">Hola 3</p>
+  </div>
+</div>
+{% endblock content %}
