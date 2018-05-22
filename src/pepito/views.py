@@ -23,9 +23,19 @@ def inicio(request):
         contexto = {
             'titulo': 'Gracias, %s'%(nombre),
         }
+        if not nombre:
+            contexto = {
+                'titulo': 'Gracias %s'%(email),
+            }
+    if request.user.is_authenticated () and request.user.is_staff:
+        queryset = Registrado.objects.all()
+        contexto = {
+            "queryset": queryset,
+        }
     return render(request, 'inicio.html', contexto)
 
 def contact(request):
+    titulo='Contacto'
     form = ContactForm(request.POST or None)
     if form.is_valid():
         form_email = form.cleaned_data.get('email')
@@ -55,5 +65,6 @@ def contact(request):
 
     contexto = {
         'form': form,
+        'titulo': titulo,
     }
     return render(request, 'form.html', contexto)

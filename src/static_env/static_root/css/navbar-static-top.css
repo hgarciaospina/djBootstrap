@@ -1,7 +1,28 @@
 body {
-  min-height: 2000px;
+  min-height: 750px;
 }
 
 .navbar-static-top {
   margin-bottom: 19px;
+}
+
+.navbar-default{
+  background-color: #97c387 !important;
+  border-color: #337AB7;
+}
+
+.navbar-default .navbar-brand{
+  color: #FFF;
+}
+
+.navbar-default .navbar-brand: hover{
+  color: #337AB7;
+}
+
+.navbar-default .navbar-nav>li>a{
+  color: #FFF;
+}
+
+.navbar-default .navbar-nav>li>a: hover {
+  color: #FAFFBD;
 }

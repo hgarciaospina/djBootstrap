@@ -1,44 +1,85 @@
-{% extends "base.html" %}
-{% load crispy_forms_tags %}
-{% block head_title %}
-  1441525
-{% endblock head_title %}
-
-{% block jumbotron %}
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="jumbotron">
-        <h1>1442515</h1>
-        <p>La mejor ficha del CDITI</p>
-        <p>ADSI</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
+    {% extends "base.html" %}
+    {% load static %}
+    {% load crispy_forms_tags %}
+    {% block head_title %}
+      1441525
+    {% endblock head_title %}
+    {% block style %}
+      .jumbotron{
+        background-color: #97c387 !important;
+        color: white !important;
+      }
+      .fa-6x{
+        font-size: 10em !important;
+      }
+    {% endblock %}
+    {% block jumbotron %}
+    {% if request.user.is_staff %}
+      <table class="table">
+         <thead class="thead-dark">
+          <tr>
+            <th scope="col">Correo de registro</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Tiempo de registrado</th>
+          </tr>
+        </thead>
+          {% for instance in queryset %}
+         <tbody>
+             <tr>
+              <td>{{instance}}</br></td>
+              <td>{{instance.nombre}}</td>
+              <td>{{instance.timestamp | timesince}}</td>
+            </tr>
+        </tboby>
+          {% endfor %}
+      </table>
+      {%  else %}
+        <div class="jumbotron">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                  <h1>1442515</h1>
+                  <p>La mejor ficha del CDITI</p>
+                  <p>ADSI</p>
+                  <p>
+                    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+                  </p>
+                </div>
+               <div class="col-sm-6">
+                 <!-- <iframe width="530" height="315" src="https://www.youtube.com/embed/ysw56HRyG_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+                 <img class="img-responsive" src="{% static 'img/anonymus.png' %}">
+              </div>
+            </div> <!--/row-->
+          </div>  <!--/container-->
+        </div> <!--/jumbotron-->
+      {% endif %}
+    {% endblock jumbotron %}
+    {%  block content %}
+      {% if not request.user.is_staff %}
+      <div class="row">
+      <div class="col-sm-3 col-xs-12 pull-right">
+        <p class="lead text-align-center">{{titulo}}</p>
+        {% if not user.is_authenticated %}
+            <form method="POST" action="">{% csrf_token%}
+               {{form | crispy}}
+               <input class="btn btn-primary" type="submit" value="Registrarme">
+            </form>
+        {% else %}
+        <i class="fas fa-users fa-5x fa-fw"></i>
+        {% endif %}
       </div>
-    </div>
-    <div class="col-sm-6" style="background-color: black; height: 24.7em">
-   </div>
+      <div class="col-sm-3 col-xs-12">
+            <p class="lead text-align-center">Hola 1</p>
+            <i class="fab fa-android fa-6x fa-fw"></i>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+            <p class="lead text-align-center">Hola 2</p>
+            <i class="fab fa-java fa-6x fa-fw"></i>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+            <p class="lead text-align-center">Hola 3</p>
+            <i class="fab fa-linux fa-6x fa-fw"></i>
+      </div>
   </div>
-{% endblock jumbotron %}
-{%  block content %}
-  <div class="row">
-  <div class="col-sm-3 col-xs-12 pull-right">
-    <p class="lead text-align-center">{{titulo}}</p>
-    {% if form %}
-        <form method="POST" action="">{% csrf_token%}
-           {{form | crispy}}
-           <input type="submit" value="Registrarme">
-       </form>
-    {% endif %}
-  </div>
-  <div class="col-sm-3 col-xs-12">
-        <p class="lead text-align-center">Hola 1</p>
-  </div>
-  <div class="col-sm-3 col-xs-12">
-        <p class="lead text-align-center">Hola 2</p>
-  </div>
-  <div class="col-sm-3 col-xs-12">
-        <p class="lead text-align-center">Hola 3</p>
-  </div>
-</div>
+ {% endif %}
 {% endblock content %}
